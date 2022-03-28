@@ -8,7 +8,6 @@ const apiRoutes = require("./src/modules/routes/routes");
 
 app.use(cors());
 
-const uri = "mongodb+srv://RNassimi:Nassimi123@cluster0.7siyk.mongodb.net/Todo_List?retryWrites=true&w=majority";
 mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use(bodyParser.json());
