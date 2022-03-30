@@ -2,13 +2,6 @@ let allTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 let valueInput = '';
 let input = null;
 
-
-window.onload = async function init() {
-  input = document.getElementById('add-task');
-  input.addEventListener('change', updateValue);
-  getTasks();
-}
-
 const getTasks = async () => {
   const response = await fetch('http://localhost:8000/allTasks', {
     method: 'GET'
