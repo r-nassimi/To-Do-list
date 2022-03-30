@@ -86,8 +86,8 @@ render = () => {
 
       const imageDelete = document.createElement('img');
       imageDelete.src = "https://www.pngplay.com/wp-content/uploads/7/Delete-Icon-Background-PNG-Image.png";
-      imageDelete.onclick = (_id) => {
-        deleteTask();
+      imageDelete.onclick = () => {
+        deleteTask(_id);
       }
       container.appendChild(imageDelete);
       content.appendChild(container);
