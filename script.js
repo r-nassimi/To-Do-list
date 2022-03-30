@@ -1,12 +1,19 @@
-let allTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+let allTasks = [];
 let valueInput = '';
 let input = null;
+const URL = 'http://localhost:8000';
+
+window.onload = async function init() {
+  input = document.getElementById('add-task');
+  input.addEventListener('change', updateValue);
+  getTasks();
+}
 
 const getTasks = async () => {
-  const response = await fetch('http://localhost:8000/allTasks', {
+  const response = await fetch(`${URL}/allTasks`, {
     method: 'GET'
   });
-  let result = await response.json();
+  const result = await response.json();
   allTasks = result.data;
   render();
 }
@@ -20,7 +27,7 @@ onClickButton = async () => {
 }
 
 const pushTasks = async () => {
-  const response = await fetch('http://localhost:8000/createTask', {
+  const response = await fetch(`${URL}/createTask`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -79,8 +86,8 @@ render = () => {
 
       const imageDelete = document.createElement('img');
       imageDelete.src = "https://www.pngplay.com/wp-content/uploads/7/Delete-Icon-Background-PNG-Image.png";
-      imageDelete.onclick = () => {
-        deleteTask(item._id);
+      imageDelete.onclick = (_id) => {
+        deleteTask();
       }
       container.appendChild(imageDelete);
       content.appendChild(container);
@@ -88,7 +95,7 @@ render = () => {
 }
 
 const onChangeCheckbox = async (e, _id) => {
-  const response = await fetch('http://localhost:8000/updateTask', {
+  const response = await fetch(`${URL}/updateTask`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -144,7 +151,7 @@ const cancel = async () => {
 
 const saveValue = async (_id) => {
   const newText = document.getElementById(`input-${_id}`)
-  const response = await fetch('http://localhost:8000/updateTask', {
+  const response = await fetch(`${URL}/updateTask`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -161,8 +168,7 @@ const saveValue = async (_id) => {
 }
 
 const deleteTask = async (_id) => {
-  console.log(_id)
-  const response = await fetch(`http://localhost:8000/deleteTask?_id=${_id}`, {
+  const response = await fetch(`${URL}/deleteTask?_id=${_id}`, {
     method: 'DELETE',
   })
   const resp = await response.json();
