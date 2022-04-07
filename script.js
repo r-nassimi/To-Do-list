@@ -40,8 +40,8 @@ const pushTasks = async () => {
   });
   const resultPOST = await response.json().then((response) => {
     allTasks.push(response);
-    input.value = "";
-    valueInput = "";
+    input.value = '';
+    valueInput = '';
     render();
   })
 }
@@ -66,7 +66,7 @@ render = () => {
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
       checkbox.checked = isCheck;
-      checkbox.onclick = function (e) {
+      checkbox.onclick = (e) => {
         onChangeCheckbox(e, _id);
       }
       container.appendChild(checkbox);
@@ -86,8 +86,8 @@ render = () => {
 
       const imageDelete = document.createElement('img');
       imageDelete.src = "https://www.pngplay.com/wp-content/uploads/7/Delete-Icon-Background-PNG-Image.png";
-      imageDelete.onclick = () => {
-        deleteTask(_id);
+      imageDelete.onclick = (_id) => {
+        deleteTask();
       }
       container.appendChild(imageDelete);
       content.appendChild(container);
@@ -127,13 +127,13 @@ const editTask = (container, _id, item) => {
   container.appendChild(editInput);
 
   const editButton = document.createElement('input');
-  editButton.type = "button";
-  editButton.value = "Save";
+  editButton.type = 'button';
+  editButton.value = 'Save';
   editButton.id = `button-${_id}`;
 
   const cancelButton = document.createElement('input');
-  cancelButton.type = "button";
-  cancelButton.value = "cancel";
+  cancelButton.type = 'button';
+  cancelButton.value = 'cancel';
   cancelButton.onclick = () => {
     cancel();
   }

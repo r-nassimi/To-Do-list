@@ -24,13 +24,11 @@ module.exports.createNewTask = (req, res, next) => {
 };
 
 module.exports.changeTaskInfo = (req, res, next) => {
-  console.log(req.body);
   const body = req.body;
   if ((body.hasOwnProperty('_id')) || (body.hasOwnProperty('text')) || (body.hasOwnProperty('isCheck'))) {
-    tasks.updateOne({id: body._id}, {
-      $set: {
-       body
-      }
+    tasks.updateOne(
+      {id: body._id}, 
+      {$set: {body}
     }).then(result => {
       tasks.find().then(result => {
         res.send(result)
